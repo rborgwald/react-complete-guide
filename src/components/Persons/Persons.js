@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Person from './Person/Person';
 
 class Persons extends Component {
@@ -9,12 +9,12 @@ class Persons extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[Persons.js] shouldComponentUpdate');
-    return true;
+    return nextProps.persons !== this.props.persons;
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate');
-    return {message: 'Snapshot!'};
+    return { message: 'Snapshot!' };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -22,7 +22,7 @@ class Persons extends Component {
   }
 
   componentWillUnmount() {
-      console.log('[Persons.js] componentWillUnmount');
+    console.log('[Persons.js] componentWillUnmount');
   }
 
   render() {
@@ -34,11 +34,10 @@ class Persons extends Component {
         name={p.name}
         age={p.age}
         click={() => this.props.clicked(idx)}
-        changed={(event) => this.props.changed(event, p.id)}
-      />);
+        changed={event => this.props.changed(event, p.id)}
+      />,
+    );
   }
-};
-
+}
 
 export default Persons;
-
