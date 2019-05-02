@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
-const cockpit = (props) => {
+const Cockpit = props => {
+  // only runs when persons changes
+  useEffect(
+    () => {
+      console.log('[Cockpit.js] useEffect');
+      setTimeout(() => {
+        alert('Saved data to cloud!');
+      }, 1000);
+      return () => {
+        console.log('[Cockpit.js] cleanup work in useEffect');
+      };
+    },
+    [props.persons],
+  );
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    };
+  });
 
   const assignedClasses = [];
   let btnClass = '';
-  if(props.showPersons) {
+  if (props.showPersons) {
     btnClass = classes.Red;
   }
   if (props.persons.length <= 2) {
@@ -17,15 +37,15 @@ const cockpit = (props) => {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>{props.title}</h1>
+      <h1>
+        {props.title}
+      </h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
-      <button
-        className={btnClass}
-        onClick={props.clicked}>
+      <button className={btnClass} onClick={props.clicked}>
         {props.showPersons ? 'Hide' : 'Show'} Persons
       </button>
     </div>
   );
 };
 
-export default cockpit;
+export default Cockpit;
