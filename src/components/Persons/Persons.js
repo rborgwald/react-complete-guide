@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps');
   //   return state;
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    return nextProps.persons !== this.props.persons;
-  }
+  // if using all props to determine should component update, then extend PureComponent
+  // this implements shouldComponentUpdate with all props for component
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate');
+  //   return nextProps.persons !== this.props.persons;
+  // }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate');
