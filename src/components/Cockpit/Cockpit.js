@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = props => {
+  const toggleBtnRef = React.useRef(null);
+
+  toggleBtnRef.current.click();
+
   // only runs when persons changes
   useEffect(
     () => {
@@ -41,7 +45,7 @@ const Cockpit = props => {
         {props.title}
       </h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         {props.showPersons ? 'Hide' : 'Show'} Persons
       </button>
     </div>
